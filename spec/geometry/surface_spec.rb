@@ -30,10 +30,6 @@ describe Geometry::Surface do
 
     it "should not define square other than surface" do
       lambda do
-        @one_dimention.square(1)
-      end.should raise_error(NoMethodError)
-
-      lambda do
         Geometry::Square.new 1, Geometry::Space.new(1)
       end.should raise_error(RuntimeError, "Square can only be created on a surface")
     end

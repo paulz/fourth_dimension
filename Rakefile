@@ -1,5 +1,23 @@
-  task :default => [:spec]
+require 'spec/rake/spectask'
+require 'spec/rake/verify_rcov'
 
-  task :spec do
-    system "spec spec\\**\\*_spec.rb"
+desc "Run all tests by default"
+task :default => [:spec]
+
+Spec::Rake::SpecTask.new do |t|
+  
+end
+
+namespace :spec do
+  Spec::Rake::SpecTask.new do |t|
+    t.rcov = true
   end
+
+  RCov::VerifyTask.new do |t|
+    t.threshold = 100
+  end
+
+  desc "Calculate and verify test coverage"
+  task :rcov => [:spec, :verify_rcov]
+end
+
