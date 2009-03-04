@@ -21,16 +21,4 @@ module Geometry
     end
   end
 
-  class Square < Cube
-    def initialize side, space
-      raise "Square can only be created on a surface" if space.dimentions != 2
-      super side, space
-    end
-
-    alias_method :area, :volume
-
-    def from_previous_dimention_class side
-      space.previous.cube side
-    end
-  end
 end
