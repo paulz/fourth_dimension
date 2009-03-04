@@ -12,9 +12,11 @@ describe Geometry::Line do
     @line.to_s.should == "Space of 1 dimensions"
   end
 
-  describe "segment of a line", :shared => true do
-    it "should have 2 vertices a volume of a side" do
+  share_examples_for "segment of a line" do
+    it "should have 2 vertices" do
       @segment.vertices.should == 2
+    end
+    it "should have a volume equal to a side" do
       @segment.volume.should == @segment.side
     end
   end
