@@ -29,6 +29,7 @@ describe Geometry::ThreeDimentionalSpace do
         @tetrahedron.side.should == 1
         @tetrahedron.vertices.should == 4
         @tetrahedron.volume.should be_close(0.117851130197758, ::Float::EPSILON)
+        Geometry::Tetrahedron.new(1).volume.should == @tetrahedron.volume 
         @tetrahedron.volume.should be_close(Math.sqrt(2) / 12 * (@tetrahedron.side ** 3), ::Float::EPSILON)
 
         @space.tetrahedron(2).volume.should == 8 * @tetrahedron.volume

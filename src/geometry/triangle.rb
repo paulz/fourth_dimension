@@ -53,12 +53,7 @@ module Geometry
 
     def hight_from_simple_formula
       n = space.dimentions
-      n > 0 ? side * Math.sqrt((n + 1.0) / 2 / n ) : 0 # to avoid NaN due to division by 0
-    end
-
-    def area
-      raise "defined Only for 2 dimentions" if space.dimentions != 2
-      volume
+      n == 0 ? 0 : side * Math.sqrt((n + 1.0) / 2 / n ) # to avoid NaN due to division by 0
     end
 
     def volume
@@ -83,14 +78,4 @@ module Geometry
 
   end
 
-  class Tetrahedron < Triangle
-    def initialize side, space
-      super
-      raise RuntimeError, "Tertrahedron only exists in 3 dimentional space" if space.dimentions != 3
-    end
-
-    def from_previous_dimention_class side
-      space.previous.triangle side
-    end
-  end
 end
