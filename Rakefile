@@ -11,6 +11,7 @@ end
 namespace :spec do
   Spec::Rake::SpecTask.new do |t|
     t.rcov = true
+    t.rcov_opts = ['--exclude', 'lib,lib\/spec,bin\/spec']
   end
 
   RCov::VerifyTask.new do |t|
