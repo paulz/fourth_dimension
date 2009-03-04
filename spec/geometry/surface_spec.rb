@@ -51,13 +51,15 @@ describe Geometry::Surface do
       it "should be less then a side" do
         @triangle.hight.should > 0
         @triangle.hight.should < @triangle.side
-
-        @triangle.hight_in_two_dimensions.should == @triangle.hight
-        @triangle.hight.should be_close(0.8660254037844385, ::Float::EPSILON)
       end
 
       it "should form in a right-angled triangle with half a side and a side as hypotenuse" do
         Math.hypot(@triangle.hight, @triangle.side/2).should be_close(@triangle.side, ::Float::EPSILON)
+      end
+
+      it "should be sqrt(3)/2=%1.2f/2=%1.2f" % [Math.sqrt(3.0), Math.sqrt(3.0)/2] do
+        @triangle.hight_in_two_dimensions.should == @triangle.hight
+        @triangle.hight.should be_close(Math.sqrt(3.0)/2, ::Float::EPSILON)
       end
 
     end
