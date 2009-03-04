@@ -6,10 +6,10 @@ describe Geometry::Line do
     @line = Geometry::Line.new
   end
 
-  it "#dimentions should be 1" do
-    @line.dimentions.should == 1
-    @line.previous.dimentions.should == 0
-    @line.to_s.should == "Space of 1 dimentions"
+  it "#dimensions should be 1" do
+    @line.dimensions.should == 1
+    @line.previous.dimensions.should == 0
+    @line.to_s.should == "Space of 1 dimensions"
   end
 
   describe "segment of a line", :shared => true do

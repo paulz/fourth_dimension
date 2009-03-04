@@ -1,17 +1,17 @@
-Problem: Calculate volume of 4-dimentional triangle
+Problem: Calculate volume of 4-dimensional triangle
 
-Using rspec and simple laws of geomenry we can develop algorythms that will calculate correct results.
-Further understanding of algorithm may lead us to analitical formula.
+Using rspec and simple laws of geometry we can develop algorithms that will calculate correct results.
+Further understanding of algorithm may lead us to analytical formula.
 
 Same formula can be used in calculations of further dependent objects
 
 Each class in Geometry module implement several approximations written as spec develops from simple to more complex.
 
 Generalizations:
-1. In calculations of a hight in two dimentions we notice divider of 2 and in three dimentions same one of 3. 
-We project that next dimentions will have a corresponding number
+1. In calculations of a hight in two dimensions we notice divider of 2 and in three dimensions same one of 3. 
+We project that next dimensions will have a corresponding number
 
-2. In calculations of volume we progress through dimentions of space from
+2. In calculations of volume we progress through dimensions of space from
 simple 0 and 1 to understandable and measurable 2 and 3 and leap forward to 4 and N.
 
 This demonstrates how to test drive algorithms to correct calculations and extrapolate results.

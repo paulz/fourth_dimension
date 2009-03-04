@@ -1,13 +1,13 @@
 require File.dirname(__FILE__)+ '/../spec_helper.rb'
 
-describe Geometry::ThreeDimentionalSpace do
+describe Geometry::ThreeDimensionalSpace do
   before :all do
-    @space = Geometry::ThreeDimentionalSpace.new
+    @space = Geometry::ThreeDimensionalSpace.new
   end
 
   it "depth should be 3" do
-    @space.dimentions.should == 3
-    @space.to_s.should == "Space of 3 dimentions"
+    @space.dimensions.should == 3
+    @space.to_s.should == "Space of 3 dimensions"
   end
 
   context "3D figures" do

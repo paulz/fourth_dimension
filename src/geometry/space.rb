@@ -4,19 +4,19 @@ require File.dirname(__FILE__)+ "/cube.rb"
 
 module Geometry
   class Space
-    attr_reader :dimentions
+    attr_reader :dimensions
     attr_reader :previous
 
-    def initialize dimentions
-      @dimentions = dimentions
+    def initialize dimensions
+      @dimensions = dimensions
     end
 
     def previous
-      @previous || @previous = dimentions == 0 ? nil : Space.new(dimentions - 1)
+      @previous || @previous = dimensions == 0 ? nil : Space.new(dimensions - 1)
     end
 
     def to_s
-      "Space of #{dimentions} dimentions"
+      "Space of #{dimensions} dimensions"
     end
 
     def cube(side)

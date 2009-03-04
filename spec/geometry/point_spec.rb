@@ -1,27 +1,27 @@
 require File.dirname(__FILE__)+ '/../spec_helper.rb'
 
-describe Geometry::ZeroDimentionalPoint do
-  context "zero dimentional space is a point" do
+describe Geometry::ZeroDimensionalPoint do
+  context "zero dimensional space is a point" do
     before(:all) do
-      @singularity = Geometry::ZeroDimentionalPoint.new
+      @singularity = Geometry::ZeroDimensionalPoint.new
     end
 
     it "should be valid as a string" do
-      @singularity.to_s.should == "Space of 0 dimentions"
+      @singularity.to_s.should == "Space of 0 dimensions"
     end
 
     it "should have depth of 0" do
-      @singularity.dimentions.should == 0
+      @singularity.dimensions.should == 0
     end
 
     it "should not a figure with a size other than 0" do
       lambda do
         @singularity.cube(1)
-      end.should raise_error(::RuntimeError, "no side with length more then 0 possible in 0 dimentions")
+      end.should raise_error(::RuntimeError, "no side with length more then 0 possible in 0 dimensions")
 
       lambda do
         @singularity.triangle(5)
-      end.should raise_error(::RuntimeError, "no side with length more then 0 possible in 0 dimentions")
+      end.should raise_error(::RuntimeError, "no side with length more then 0 possible in 0 dimensions")
     end
 
     context "#cube" do

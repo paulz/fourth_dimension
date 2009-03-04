@@ -5,8 +5,8 @@ include Benchmark
 describe "Calculations should be relatively fast" do
 
   before(:all) do
-    @four_dimentions = Geometry::Space.new(4)
-    @pentachoron = @four_dimentions.simplex(10)
+    @four_dimensions = Geometry::Space.new(4)
+    @pentachoron = @four_dimensions.simplex(10)
   end
 
   after :each do

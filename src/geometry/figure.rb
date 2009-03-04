@@ -10,7 +10,7 @@ module Geometry
     end
 
     def vertices
-      return 1 + space.dimentions
+      return 1 + space.dimensions
     end
 
     def volume
@@ -19,15 +19,15 @@ module Geometry
 
     protected
 
-    def from_previous_dimention with_side = side
+    def from_previous_dimension with_side = side
       if with_side == side
-        @previous ||  @previous = from_previous_dimention_class(with_side)
+        @previous ||  @previous = from_previous_dimension_class(with_side)
       else
-        from_previous_dimention_class(with_side)
+        from_previous_dimension_class(with_side)
       end
     end
 
-    def from_previous_dimention_class side
+    def from_previous_dimension_class side
       self.class.new side, space.previous
     end
 

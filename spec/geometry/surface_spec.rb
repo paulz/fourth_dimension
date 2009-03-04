@@ -6,9 +6,9 @@ describe Geometry::Surface do
     @surface = Geometry::Surface.new
   end
 
-  it "#dimentions" do
-    @surface.dimentions.should == 2
-    @surface.to_s.should == "Space of 2 dimentions"
+  it "#dimensions" do
+    @surface.dimensions.should == 2
+    @surface.to_s.should == "Space of 2 dimensions"
   end
 
   context "#square" do
@@ -52,7 +52,7 @@ describe Geometry::Surface do
         @triangle.hight.should > 0
         @triangle.hight.should < @triangle.side
 
-        @triangle.hight_in_two_dimentions.should == @triangle.hight
+        @triangle.hight_in_two_dimensions.should == @triangle.hight
         @triangle.hight.should be_close(0.8660254037844385, ::Float::EPSILON)
       end
 
