@@ -10,13 +10,14 @@ module Geometry
 
     def calc_hight precision = 10000
       inc = side / (precision + 0.0)
-      sample = nil
       previous_hight = from_previous_dimension.hight
-      precision.downto(0) do |percent|
+      precision.downto(1) do |percent|
         sample = inc * percent
-        break if (sample ** 2 + (previous_hight/space.dimensions) ** 2 ) < previous_hight ** 2
+        if Math.hypot(sample, previous_hight/space.dimensions) < previous_hight
+          return sample
+        end
       end
-      sample
+      raise RuntimeError, "Unable to calculate hight with precision #{precision}, side=#{side}"
     end
 
     def analize_hight

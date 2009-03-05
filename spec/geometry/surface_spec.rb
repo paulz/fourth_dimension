@@ -65,11 +65,19 @@ describe Geometry::Surface do
     end
 
     it "#calc_high" do
+      @triangle.calc_hight(1000).should == 0.866
       @triangle.calc_hight(1000).should be_close(@triangle.hight, 0.001)
-      @triangle.calc_hight(10000).should be_close(@triangle.hight, 0.0001)
+      @triangle.calc_hight.should be_close(@triangle.hight, 0.0001)
       @triangle.calc_hight(100000).should be_close(@triangle.hight, 0.00001)
+      @triangle.calc_hight(100000).should be_close(0.86602, ::Float::EPSILON)
 
       @triangle.calc_hight(100).should_not == @triangle.calc_hight(100000)
+
+      lambda do
+        Math.stub!(:hypot).and_return(1000)
+        @triangle.calc_hight(100)
+      end.should raise_error(RuntimeError, "Unable to calculate hight with precision 100, side=1.0")
+
     end
 
     it "#analize_hight" do
