@@ -54,12 +54,12 @@ describe Geometry::Surface do
       end
 
       it "should form in a right-angled triangle with half a side and a side as hypotenuse" do
-        Math.hypot(@triangle.hight, @triangle.side/2).should be_close(@triangle.side, ::Float::EPSILON)
+        Math.hypot(@triangle.hight, @triangle.side/2).should be_very_close(@triangle.side)
       end
 
       it "should be sqrt(3)/2=%1.2f/2=%1.2f" % [Math.sqrt(3.0), Math.sqrt(3.0)/2] do
         @triangle.hight_in_two_dimensions.should == @triangle.hight
-        @triangle.hight.should be_close(Math.sqrt(3.0)/2, ::Float::EPSILON)
+        @triangle.hight.should be_very_close Math.sqrt(3.0)/2
       end
 
     end
@@ -69,7 +69,7 @@ describe Geometry::Surface do
       @triangle.calc_hight(1000).should be_close(@triangle.hight, 0.001)
       @triangle.calc_hight.should be_close(@triangle.hight, 0.0001)
       @triangle.calc_hight(100000).should be_close(@triangle.hight, 0.00001)
-      @triangle.calc_hight(100000).should be_close(0.86602, ::Float::EPSILON)
+      @triangle.calc_hight(100000).should be_very_close(0.86602)
 
       @triangle.calc_hight(100).should_not == @triangle.calc_hight(100000)
 

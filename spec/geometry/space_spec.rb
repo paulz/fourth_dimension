@@ -28,9 +28,9 @@ describe Geometry::ThreeDimensionalSpace do
       it "should have a known volume" do
         @tetrahedron.side.should == 1
         @tetrahedron.vertices.should == 4
-        @tetrahedron.volume.should be_close(0.117851130197758, ::Float::EPSILON)
+        @tetrahedron.volume.should be_very_close(0.117851130197758)
         Geometry::Tetrahedron.new(1).volume.should == @tetrahedron.volume 
-        @tetrahedron.volume.should be_close(Math.sqrt(2) * @tetrahedron.side ** 3 / 12, ::Float::EPSILON)
+        @tetrahedron.volume.should be_very_close(Math.sqrt(2) * @tetrahedron.side ** 3 / 12)
 
         @space.tetrahedron(2).volume.should == 8 * @tetrahedron.volume
       end
@@ -48,7 +48,7 @@ describe Geometry::ThreeDimensionalSpace do
 
         [0, 1, 2, 50].each do |size|
           it "should be equal to side %2.2f by square root of 2/3 = %1.2f" % [size, size * Math.sqrt(2.0/3)] do
-            @space.tetrahedron(5).hight.should be_close(5 * Math.sqrt(2.0/3), ::Float::EPSILON)
+            @space.tetrahedron(5).hight.should be_very_close(5 * Math.sqrt(2.0/3))
 
             tetrahedron = @space.tetrahedron(size)
             tetrahedron.hight.should be_close(size * Math.sqrt(2.0/3), ::Float::EPSILON * (1 + size))
@@ -59,7 +59,7 @@ describe Geometry::ThreeDimensionalSpace do
           surface = @space.previous
           previous_hight = surface.triangle(1).hight
           @tetrahedron.hight.should < previous_hight
-          Math.hypot(@tetrahedron.hight, previous_hight/3).should be_close(previous_hight, ::Float::EPSILON) 
+          Math.hypot(@tetrahedron.hight, previous_hight/3).should be_very_close(previous_hight) 
         end
       end
     end
