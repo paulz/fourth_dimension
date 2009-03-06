@@ -20,25 +20,31 @@ describe Geometry::ThreeDimensionalSpace do
       @space.cube(1).vertices.should == 8
     end
 
-    context "#tetrahedron" do
+    describe "#tetrahedron" do
       before :all do
         @tetrahedron = @space.tetrahedron(1)
-      end
-
-      it "should have a known volume" do
         @tetrahedron.side.should == 1
-        @tetrahedron.vertices.should == 4
-        @tetrahedron.volume.should be_very_close(0.117851130197758)
-        Geometry::Tetrahedron.new(1).volume.should == @tetrahedron.volume 
-        @tetrahedron.volume.should be_very_close(Math.sqrt(2) * @tetrahedron.side ** 3 / 12)
-
-        @space.tetrahedron(2).volume.should == 8 * @tetrahedron.volume
       end
 
-      it "should approximate volume by slices" do
-        @space.tetrahedron(2).calc_volume(100).should == 8 * @space.tetrahedron(1).calc_volume(100)
+      it "should have 4 vertices" do
+        @tetrahedron.vertices.should == 4
+      end
 
-        @tetrahedron.calc_volume(10000).should be_close(@tetrahedron.volume, 0.0001)
+      describe "#volume" do
+        it "should be 2**3=8 times smaller when side is 2 times smaller" do
+          @space.tetrahedron(2).volume.should == 8 * @tetrahedron.volume
+        end
+
+        it "should be sqrt(2)/12 by side cube, that is %1.2f/12=%1.2f" % [Math.sqrt(2.0), Math.sqrt(2.0)/12] do
+          @tetrahedron.volume.should be_very_close(Math.sqrt(2.0) * @tetrahedron.side ** 3 / 12)
+          @tetrahedron.volume.should be_very_close(0.117851130197758)
+        end
+
+        it "should approximate volume by slices" do
+          @space.tetrahedron(2).calc_volume(100).should == 8 * @space.tetrahedron(1).calc_volume(100)
+
+          @tetrahedron.calc_volume(10000).should be_close(@tetrahedron.volume, 0.0001)
+        end
       end
 
       context "#hight" do
@@ -55,11 +61,11 @@ describe Geometry::ThreeDimensionalSpace do
           end
         end
 
-        it "should have hight with a triangular to previous hight and a third" do
+        it "should form a right triangular with previous hight and a third of it" do
           surface = @space.previous
           previous_hight = surface.triangle(1).hight
           @tetrahedron.hight.should < previous_hight
-          Math.hypot(@tetrahedron.hight, previous_hight/3).should be_very_close(previous_hight) 
+          Math.hypot(@tetrahedron.hight, previous_hight/3).should be_very_close(previous_hight)
         end
       end
     end

@@ -85,13 +85,18 @@ describe Geometry::Surface do
       @triangle.over_analize_hight.should == @triangle.hight
     end
 
-    it "should have area of hight by half a side" do
-      @triangle.area.should == @triangle.hight * @triangle.side / 2
-    end
+    describe "#area" do
+      it "should be hight by half a side" do
+        @triangle.area.should == @triangle.hight * @triangle.side / 2
+      end
 
-    it "should have area four times large then one of a half a side" do
-      @triangle.area.should == 4 * @surface.triangle(0.5).area
+      it "should be sqrt(3)/4 by side square" do
+        @triangle.area.should == Math.sqrt(3.0) / 4 * @triangle.side ** 2
+      end
+
+      it "should have area four times large then one of a half a side" do
+        @triangle.area.should == 4 * @surface.triangle(0.5).area
+      end
     end
   end
-
 end
