@@ -28,7 +28,7 @@ module Geometry
     end
 
     def from_previous_dimension_class side
-      self.class.new side, space.previous
+      self.class.previous_class.new side, space.previous
     end
 
   end

@@ -19,6 +19,11 @@ module Geometry
         2 * from_previous_dimension.vertices
       end
     end
+
+    def self.previous_class
+      Cube
+    end
+    
   end
 
 end

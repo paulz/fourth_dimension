@@ -7,10 +7,6 @@ module Geometry
     end
 
     alias_method :area, :volume
-
-    def from_previous_dimension_class side
-      space.previous.cube side
-    end
   end
   
   class Surface < Space
@@ -21,7 +17,6 @@ module Geometry
     def square side
       Square.new side, self
     end
-#    alias_method :square, :volume
   end
 
   class Figure

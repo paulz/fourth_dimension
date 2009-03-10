@@ -35,16 +35,11 @@ module Geometry
     end
 
     def calc_volume precision = 10000
-      case space.dimensions
-      when 0, 1:
-        0
-      else
         previous_volume = 0
         precision.downto(0) do |portion|
           previous_volume += from_previous_dimension(side * portion/precision).volume
         end
         previous_volume * hight / precision
-      end
     end
 
     def calc_simplex_formula
@@ -67,6 +62,9 @@ module Geometry
     end
 
     private
+    def self.previous_class
+      Triangle
+    end
 
     def factorial n
       case n
