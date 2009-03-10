@@ -64,20 +64,28 @@ describe Geometry::Surface do
 
     end
 
-    it "#calc_high" do
-      @triangle.calc_hight(1000).should == 0.866
-      @triangle.calc_hight(1000).should be_close(@triangle.hight, 0.001)
-      @triangle.calc_hight.should be_close(@triangle.hight, 0.0001)
-      @triangle.calc_hight(100000).should be_close(@triangle.hight, 0.00001)
-      @triangle.calc_hight(100000).should be_very_close(0.86602)
+    describe "#calc_high" do
+      it "should approximate value of hight with 3 digits, but not equal" do
+        @triangle.calc_hight(1000).should == 0.866
+        0.866.should_not == @triangle.hight
+      end
 
-      @triangle.calc_hight(100).should_not == @triangle.calc_hight(100000)
+      (2..6).each do |precision|
+      it "should approximate with #{precision} digits precision" do
+        @triangle.calc_hight(10**precision).should be_close(@triangle.hight, 1.0/(10**precision))
+      end
+      end
 
-      lambda do
-        Math.stub!(:hypot).and_return(1000)
-        @triangle.calc_hight(100)
-      end.should raise_error(RuntimeError, "Unable to calculate hight with precision 100, side=1.0")
+      it "should produce different values depending on precision" do
+        @triangle.calc_hight(100).should_not == @triangle.calc_hight(100000)
+      end
 
+      it "should raise an exception when unable to approximate" do
+        lambda do
+          Math.stub!(:hypot).and_return(1000)
+          @triangle.calc_hight(100)
+        end.should raise_error(RuntimeError, "Unable to calculate hight with precision 100, side=1.0")
+      end
     end
 
     it "#analize_hight" do

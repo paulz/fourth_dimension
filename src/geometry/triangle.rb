@@ -54,7 +54,7 @@ module Geometry
 
     def hight_from_simple_formula
       n = space.dimensions
-      n == 0 ? 0 : side * Math.sqrt((n + 1.0) / 2 / n ) # to avoid NaN due to division by 0
+      n == 0 ? 0 : side * Math.sqrt((n + 1.0) / 2 / n )
     end
 
     def volume
