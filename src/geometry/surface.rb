@@ -5,8 +5,6 @@ module Geometry
       raise "Square can only be created on a surface" if space.dimensions != 2
       super side, space
     end
-
-    alias_method :area, :volume
   end
   
   class Surface < Space
