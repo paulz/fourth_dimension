@@ -59,7 +59,7 @@ describe Geometry::Surface do
 
       it "should be sqrt(3)/2=%1.2f/2=%1.2f" % [Math.sqrt(3.0), Math.sqrt(3.0)/2] do
         @triangle.hight_in_two_dimensions.should == @triangle.hight
-        @triangle.hight.should be_very_close Math.sqrt(3.0)/2
+        @triangle.hight.should be_very_close(Math.sqrt(3.0)/2)
       end
 
     end
