@@ -36,8 +36,8 @@ describe Geometry::Line do
       end
       it_should_behave_like "segment of a line"
 
-      it "#hight" do
-        @segment.hight.should == @segment.side
+      it "#height" do
+        @segment.height.should == @segment.side
       end
     end
   end

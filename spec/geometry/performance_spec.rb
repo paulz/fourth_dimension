@@ -13,7 +13,7 @@ describe "Calculations should be relatively fast" do
     @benchmark.utime.should be_close(0.069, 0.04)
   end
 
-  PERFORMANCE_FACTOR = 2
+  PERFORMANCE_FACTOR = 1.5
 
   it "#volume" do
     @benchmark = Benchmark.measure do
@@ -39,26 +39,26 @@ describe "Calculations should be relatively fast" do
     end
   end
 
-  it "#over_analize_hight" do
+  it "#over_analize_height" do
     @benchmark = Benchmark.measure do
       (1..2000 * PERFORMANCE_FACTOR).each do
-        @pentachoron.over_analize_hight
+        @pentachoron.over_analize_height
       end
     end
   end
 
-  it "#calc_hight" do
+  it "#calc_height" do
     @benchmark = Benchmark.measure do
       (1..80 * PERFORMANCE_FACTOR).each do
-        @pentachoron.calc_hight 1000
+        @pentachoron.calc_height 1000
       end
     end
   end
 
-  it "#hight" do
+  it "#height" do
     @benchmark = Benchmark.measure do
       (1..10000 * PERFORMANCE_FACTOR).each do
-        @pentachoron.hight
+        @pentachoron.height
       end
     end
   end

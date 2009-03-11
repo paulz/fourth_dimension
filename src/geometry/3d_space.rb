@@ -5,10 +5,6 @@ module Geometry
       super
       raise RuntimeError, "Tertrahedron only exists in 3 dimensional space" if space.dimensions != 3
     end
-
-    def from_previous_dimension_class side
-      space.previous.triangle side
-    end
   end
 
   class ThreeDimensionalSpace < Space

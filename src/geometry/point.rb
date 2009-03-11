@@ -1,19 +1,32 @@
 require File.dirname(__FILE__)+ "/space.rb"
 
 module Geometry
-  class ZeroDimensionalPoint < Space
+  class Point < Figure
+    def initialize side = 0, space = ZeroDimensionalSpace.new
+      raise "Point can only be created in zero dimensions" if space.dimensions != 0
+      raise "Point can only be size zero" if side != 0
+      super side, space
+    end
+
+    alias_method :height, :side
+  end
+
+  class ZeroDimensionalSpace < Space
     def initialize
       super 0
     end
 
     def cube side
-      raise RuntimeError, "no side with length more then 0 possible in 0 dimensions" if side != 0
-      super
+      point side
     end
 
     def triangle side
-      raise RuntimeError, "no side with length more then 0 possible in 0 dimensions" if side != 0
-      super
+      point side
     end
+
+    def point side = 0
+      Point.new side, self
+    end
+
   end
 end

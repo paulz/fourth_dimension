@@ -20,46 +20,52 @@ describe Geometry::ThreeDimensionalSpace do
       @space.cube(1).vertices.should == 8
     end
 
-    context "#tetrahedron" do
+    describe "#tetrahedron" do
       before :all do
         @tetrahedron = @space.tetrahedron(1)
-      end
-
-      it "should have a known volume" do
         @tetrahedron.side.should == 1
+      end
+
+      it "should have 4 vertices" do
         @tetrahedron.vertices.should == 4
-        @tetrahedron.volume.should be_close(0.117851130197758, ::Float::EPSILON)
-        Geometry::Tetrahedron.new(1).volume.should == @tetrahedron.volume 
-        @tetrahedron.volume.should be_close(Math.sqrt(2) / 12 * (@tetrahedron.side ** 3), ::Float::EPSILON)
-
-        @space.tetrahedron(2).volume.should == 8 * @tetrahedron.volume
       end
 
-      it "should approximate volume by slices" do
-        @space.tetrahedron(2).calc_volume(100).should == 8 * @space.tetrahedron(1).calc_volume(100)
-
-        @tetrahedron.calc_volume(10000).should be_close(@tetrahedron.volume, 0.0001)
-      end
-
-      context "#hight" do
-        it "should have a known hight" do
-          @tetrahedron.hight.should be_close(0.817, 0.001)
+      describe "#volume" do
+        it "should be 2**3=8 times smaller when side is 2 times smaller" do
+          @space.tetrahedron(2).volume.should == 8 * @tetrahedron.volume
         end
 
-        it "should be equal to side by square root of 2/3" do
-          @tetrahedron.hight.should be_close(@tetrahedron.side * Math.sqrt(2.0/3), ::Float::EPSILON)
+        it "should be sqrt(2)/12 by side cube, that is %1.2f/12=%1.2f" % [Math.sqrt(2.0), Math.sqrt(2.0)/12] do
+          @tetrahedron.volume.should be_very_close(Math.sqrt(2.0) * @tetrahedron.side ** 3 / 12)
+          @tetrahedron.volume.should be_very_close(0.117851130197758)
+        end
 
-          [0, 1, 2, 50].each do |size|
+        it "should approximate volume by slices" do
+          @space.tetrahedron(2).calc_volume(100).should == 8 * @space.tetrahedron(1).calc_volume(100)
+
+          @tetrahedron.calc_volume(10000).should be_close(@tetrahedron.volume, 0.0001)
+        end
+      end
+
+      context "#height" do
+        it "should have a known height of sqrt(2/3)=sqrt(2)/sqrt(3)=%1.2f/%1.2f=%1.2f" % [Math.sqrt(2.0), Math.sqrt(3.0), Math.sqrt(2.0/3)] do
+          @tetrahedron.height.should be_close(Math.sqrt(2.0/3), 0.001)
+        end
+
+        [0, 1, 2, 50].each do |size|
+          it "should be equal to side %2.2f by square root of 2/3 = %1.2f" % [size, size * Math.sqrt(2.0/3)] do
+            @space.tetrahedron(5).height.should be_very_close(5 * Math.sqrt(2.0/3))
+
             tetrahedron = @space.tetrahedron(size)
-            tetrahedron.hight.should be_close(size * Math.sqrt(2.0/3), ::Float::EPSILON * (1 + size))
+            tetrahedron.height.should be_close(size * Math.sqrt(2.0/3), ::Float::EPSILON * (1 + size))
           end
         end
 
-        it "should have hight with a triangular to previous hight and a third" do
+        it "should form a right triangular with previous height and a third of it" do
           surface = @space.previous
-          previous_hight = surface.triangle(1).hight
-          @tetrahedron.hight.should < previous_hight
-          (@tetrahedron.hight ** 2 + (previous_hight/3) **2 ).should be_close(previous_hight ** 2, ::Float::EPSILON)
+          previous_height = surface.triangle(1).height
+          @tetrahedron.height.should < previous_height
+          Math.hypot(@tetrahedron.height, previous_height/3).should be_very_close(previous_height)
         end
       end
     end

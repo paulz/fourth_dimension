@@ -16,13 +16,13 @@ describe Geometry::Space do
       it "#volume" do
         @four_dimensions.simplex(2).volume.should == 16 * @pentachoron.volume
 
-        @pentachoron.volume.should be_close(0.0232923747656228, ::Float::EPSILON)
+        @pentachoron.volume.should be_very_close(0.0232923747656228)
       end
 
       it "#calc_simplex_formula" do
         # See formular at http://en.wikipedia.org/wiki/Simplex
         # http://upload.wikimedia.org/math/1/0/4/10457cdca57c10861902004469b9cf02.png
-        @pentachoron.calc_simplex_formula.should be_close(@pentachoron.volume, ::Float::EPSILON)
+        @pentachoron.calc_simplex_formula.should be_very_close(@pentachoron.volume)
       end
 
       it "#calc_volume" do
@@ -30,14 +30,14 @@ describe Geometry::Space do
       end
 
       it "#height" do
-        hight = @pentachoron.hight
-        hight.should be_close(0.790569415042095, ::Float::EPSILON)
-        @pentachoron.calc_hight(10000).should be_close(hight, 0.0001)
+        height = @pentachoron.height
+        height.should be_very_close(0.790569415042095)
+        @pentachoron.calc_height(10000).should be_close(height, 0.0001)
       end
 
-      it "#hight_from_simple_formula" do
-        @pentachoron.hight_from_simple_formula.should be_close(@pentachoron.hight, ::Float::EPSILON)
-        @four_dimensions.simplex(2).hight_from_simple_formula.should be_close(2 * @pentachoron.hight, 2 * ::Float::EPSILON)
+      it "#height_from_simple_formula" do
+        @pentachoron.height_from_simple_formula.should be_very_close(@pentachoron.height)
+        @four_dimensions.simplex(2).height_from_simple_formula.should be_close(2 * @pentachoron.height, 2 * ::Float::EPSILON)
       end
     end
 
