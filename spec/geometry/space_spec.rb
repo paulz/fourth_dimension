@@ -11,13 +11,16 @@ describe Geometry::ThreeDimensionalSpace do
   end
 
   context "3D figures" do
-    it "#cube" do
-      @space.cube(1).side.should == 1
-      @space.cube(1).volume.should == 1
-      @space.cube(2).volume.should == 8
-      @space.cube(17).volume.should == 17 ** 3
+    describe "#cube" do
+      it "volume should be cube of a side" do
+        @space.cube(1).volume.should == 1
+        @space.cube(2).volume.should == 8
+        @space.cube(17).volume.should == 17 ** 3
+      end
 
-      @space.cube(1).vertices.should == 8
+      it "#vertices" do
+        @space.cube(1).vertices.should == 8
+      end
     end
 
     describe "#tetrahedron" do
@@ -39,10 +42,14 @@ describe Geometry::ThreeDimensionalSpace do
           @tetrahedron.volume.should be_very_close(Math.sqrt(2.0) * @tetrahedron.side ** 3 / 12)
           @tetrahedron.volume.should be_very_close(0.117851130197758)
         end
+      end
 
-        it "should approximate volume by slices" do
+      describe "#calc_volume" do
+        it "it should be proportional to the cube of the side" do
           @space.tetrahedron(2).calc_volume(100).should == 8 * @space.tetrahedron(1).calc_volume(100)
+        end
 
+        it "should approximate volume with precision" do
           @tetrahedron.calc_volume(10000).should be_close(@tetrahedron.volume, 0.0001)
         end
       end
