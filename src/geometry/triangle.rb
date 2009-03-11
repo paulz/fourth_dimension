@@ -1,35 +1,35 @@
 module Geometry
   class Triangle < Figure
-    def hight
-      hight_from_simple_formula
+    def height
+      height_from_simple_formula
     end
 
-    def hight_in_two_dimensions
+    def height_in_two_dimensions
       side * Math.sqrt(3)/2
     end
 
-    def calc_hight precision = 10000
+    def calc_height precision = 10000
       inc = side / (precision + 0.0)
-      previous_hight = from_previous_dimension.hight
+      previous_height = from_previous_dimension.height
       precision.downto(1) do |percent|
         sample = inc * percent
-        if Math.hypot(sample, previous_hight/space.dimensions) < previous_hight
+        if Math.hypot(sample, previous_height/space.dimensions) < previous_height
           return sample
         end
       end
-      raise RuntimeError, "Unable to calculate hight with precision #{precision}, side=#{side}"
+      raise RuntimeError, "Unable to calculate height with precision #{precision}, side=#{side}"
     end
 
-    def analize_hight
+    def analize_height
       Math.sqrt( side ** 2 - (side/space.dimensions) ** 2 )
     end
 
-    def over_analize_hight
+    def over_analize_height
       case space.dimensions
       when 0, 1:
         volume
       else
-        previous = from_previous_dimension.over_analize_hight
+        previous = from_previous_dimension.over_analize_height
         Math.sqrt( previous ** 2 - (previous/space.dimensions) ** 2 )
       end
     end
@@ -39,7 +39,7 @@ module Geometry
         precision.downto(0) do |portion|
           previous_volume += from_previous_dimension(side * portion/precision).volume
         end
-        previous_volume * hight / precision
+        previous_volume * height / precision
     end
 
     def calc_simplex_formula
@@ -47,7 +47,7 @@ module Geometry
       side ** n * Math.sqrt(n + 1) / Math.sqrt(2 ** n) / factorial(n)
     end
 
-    def hight_from_simple_formula
+    def height_from_simple_formula
       n = space.dimensions
       n == 0 ? 0 : side * Math.sqrt((n + 1.0) / 2 / n )
     end
@@ -57,7 +57,7 @@ module Geometry
       when 0, 1:
         super
       else
-        from_previous_dimension.volume * hight / space.dimensions
+        from_previous_dimension.volume * height / space.dimensions
       end
     end
 

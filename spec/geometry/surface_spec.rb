@@ -47,55 +47,55 @@ describe Geometry::Surface do
       @triangle.vertices.should == 3
     end
 
-    context "#hight" do
+    context "#height" do
       it "should be less then a side" do
-        @triangle.hight.should > 0
-        @triangle.hight.should < @triangle.side
+        @triangle.height.should > 0
+        @triangle.height.should < @triangle.side
       end
 
       it "should form in a right-angled triangle with half a side and a side as hypotenuse" do
-        Math.hypot(@triangle.hight, @triangle.side/2).should be_very_close(@triangle.side)
+        Math.hypot(@triangle.height, @triangle.side/2).should be_very_close(@triangle.side)
       end
 
       it "should be sqrt(3)/2=%1.2f/2=%1.2f" % [Math.sqrt(3.0), Math.sqrt(3.0)/2] do
-        @triangle.hight_in_two_dimensions.should == @triangle.hight
-        @triangle.hight.should be_very_close(Math.sqrt(3.0)/2)
+        @triangle.height_in_two_dimensions.should == @triangle.height
+        @triangle.height.should be_very_close(Math.sqrt(3.0)/2)
       end
 
     end
 
     describe "#calc_high" do
-      it "should approximate value of hight with 3 digits, but not equal" do
-        @triangle.calc_hight(1000).should == 0.866
-        0.866.should_not == @triangle.hight
+      it "should approximate value of height with 3 digits, but not equal" do
+        @triangle.calc_height(1000).should == 0.866
+        0.866.should_not == @triangle.height
       end
 
       (2..6).each do |precision|
       it "should approximate with #{precision} digits precision" do
-        @triangle.calc_hight(10**precision).should be_close(@triangle.hight, 1.0/(10**precision))
+        @triangle.calc_height(10**precision).should be_close(@triangle.height, 1.0/(10**precision))
       end
       end
 
       it "should produce different values depending on precision" do
-        @triangle.calc_hight(100).should_not == @triangle.calc_hight(100000)
+        @triangle.calc_height(100).should_not == @triangle.calc_height(100000)
       end
 
       it "should raise an exception when unable to approximate" do
         lambda do
           Math.stub!(:hypot).and_return(1000)
-          @triangle.calc_hight(100)
-        end.should raise_error(RuntimeError, "Unable to calculate hight with precision 100, side=1.0")
+          @triangle.calc_height(100)
+        end.should raise_error(RuntimeError, "Unable to calculate height with precision 100, side=1.0")
       end
     end
 
-    it "#analize_hight" do
-      @triangle.analize_hight.should == @triangle.hight
-      @triangle.over_analize_hight.should == @triangle.hight
+    it "#analize_height" do
+      @triangle.analize_height.should == @triangle.height
+      @triangle.over_analize_height.should == @triangle.height
     end
 
     describe "#area" do
-      it "should be hight by half a side" do
-        @triangle.area.should == @triangle.hight * @triangle.side / 2
+      it "should be height by half a side" do
+        @triangle.area.should == @triangle.height * @triangle.side / 2
       end
 
       it "should be sqrt(3)/4 by side square" do

@@ -8,7 +8,7 @@ module Geometry
       super side, space
     end
 
-    alias_method :hight, :side
+    alias_method :height, :side
   end
 
   class ZeroDimensionalSpace < Space

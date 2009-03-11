@@ -47,25 +47,25 @@ describe Geometry::ThreeDimensionalSpace do
         end
       end
 
-      context "#hight" do
-        it "should have a known hight of sqrt(2/3)=sqrt(2)/sqrt(3)=%1.2f/%1.2f=%1.2f" % [Math.sqrt(2.0), Math.sqrt(3.0), Math.sqrt(2.0/3)] do
-          @tetrahedron.hight.should be_close(Math.sqrt(2.0/3), 0.001)
+      context "#height" do
+        it "should have a known height of sqrt(2/3)=sqrt(2)/sqrt(3)=%1.2f/%1.2f=%1.2f" % [Math.sqrt(2.0), Math.sqrt(3.0), Math.sqrt(2.0/3)] do
+          @tetrahedron.height.should be_close(Math.sqrt(2.0/3), 0.001)
         end
 
         [0, 1, 2, 50].each do |size|
           it "should be equal to side %2.2f by square root of 2/3 = %1.2f" % [size, size * Math.sqrt(2.0/3)] do
-            @space.tetrahedron(5).hight.should be_very_close(5 * Math.sqrt(2.0/3))
+            @space.tetrahedron(5).height.should be_very_close(5 * Math.sqrt(2.0/3))
 
             tetrahedron = @space.tetrahedron(size)
-            tetrahedron.hight.should be_close(size * Math.sqrt(2.0/3), ::Float::EPSILON * (1 + size))
+            tetrahedron.height.should be_close(size * Math.sqrt(2.0/3), ::Float::EPSILON * (1 + size))
           end
         end
 
-        it "should form a right triangular with previous hight and a third of it" do
+        it "should form a right triangular with previous height and a third of it" do
           surface = @space.previous
-          previous_hight = surface.triangle(1).hight
-          @tetrahedron.hight.should < previous_hight
-          Math.hypot(@tetrahedron.hight, previous_hight/3).should be_very_close(previous_hight)
+          previous_height = surface.triangle(1).height
+          @tetrahedron.height.should < previous_height
+          Math.hypot(@tetrahedron.height, previous_height/3).should be_very_close(previous_height)
         end
       end
     end

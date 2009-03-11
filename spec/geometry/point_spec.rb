@@ -52,8 +52,8 @@ describe Geometry::ZeroDimensionalSpace do
 
     it_should_behave_like "a point"
 
-    it "hight should be zero" do
-      @singularity.triangle(0).hight.should == 0
+    it "height should be zero" do
+      @singularity.triangle(0).height.should == 0
     end
   end
 end

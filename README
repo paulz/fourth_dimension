@@ -8,7 +8,7 @@ Same formula can be used in calculations of further dependent objects
 Each class in Geometry module implement several approximations written as spec develops from simple to more complex.
 
 Generalizations:
-1. In calculations of a hight in two dimensions we notice divider of 2 and in three dimensions same one of 3. 
+1. In calculations of a height in two dimensions we notice divisor of 2 and in three dimensions same one of 3. 
 We project that next dimensions will have a corresponding number
 
 2. In calculations of volume we progress through dimensions of space from

@@ -30,14 +30,14 @@ describe Geometry::Space do
       end
 
       it "#height" do
-        hight = @pentachoron.hight
-        hight.should be_very_close(0.790569415042095)
-        @pentachoron.calc_hight(10000).should be_close(hight, 0.0001)
+        height = @pentachoron.height
+        height.should be_very_close(0.790569415042095)
+        @pentachoron.calc_height(10000).should be_close(height, 0.0001)
       end
 
-      it "#hight_from_simple_formula" do
-        @pentachoron.hight_from_simple_formula.should be_very_close(@pentachoron.hight)
-        @four_dimensions.simplex(2).hight_from_simple_formula.should be_close(2 * @pentachoron.hight, 2 * ::Float::EPSILON)
+      it "#height_from_simple_formula" do
+        @pentachoron.height_from_simple_formula.should be_very_close(@pentachoron.height)
+        @four_dimensions.simplex(2).height_from_simple_formula.should be_close(2 * @pentachoron.height, 2 * ::Float::EPSILON)
       end
     end
 
