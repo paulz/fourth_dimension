@@ -16,7 +16,11 @@ require File.dirname(__FILE__)+ '/../spec_helper.rb'
 
     share_examples_for "similar #{n} dimensional figures" do
       it "volume should be proportional to it's side in power of #{n}" do
-        (@figure1.volume / @figure2.volume).should be_close( (@figure1.side / @figure2.side) ** n, ::Float::EPSILON)
+        (@figure1.volume / @figure2.volume).should be_very_close( (@figure1.side / @figure2.side) ** n)
+      end
+
+      it "volume to side in power #{n} should be same" do
+        (@figure1.volume / @figure1.side ** n).should be_very_close((@figure2.volume / @figure2.side ** n))
       end
 
       it "should have same number of vertices" do
@@ -59,7 +63,7 @@ require File.dirname(__FILE__)+ '/../spec_helper.rb'
         end
 
         it "should be proportional to the side" do
-          (@figure1.height/@figure2.height).should be_close(@figure1.side/@figure2.side, ::Float::EPSILON) 
+          (@figure1.height/@figure2.height).should be_very_close(@figure1.side/@figure2.side)
         end
       end
 
