@@ -37,6 +37,9 @@ describe Geometry::Surface do
   end
 
   context "#triangle" do
+    SQRT_3 = Math.sqrt(3.0)
+    SQRT_3_DIV_2 = Math.sqrt(3.0) / 2
+
     before :all do
       @triangle = @surface.triangle(1)
     end
@@ -45,6 +48,7 @@ describe Geometry::Surface do
       @triangle.side.should == 1
       @triangle.area.should < 1
       @triangle.vertices.should == 3
+      @triangle.approx_volume.should == 0.4330127018922193
     end
 
     context "#height" do
@@ -57,9 +61,9 @@ describe Geometry::Surface do
         Math.hypot(@triangle.height, @triangle.side/2).should be_very_close(@triangle.side)
       end
 
-      it "should be sqrt(3)/2=%1.2f/2=%1.2f" % [Math.sqrt(3.0), Math.sqrt(3.0)/2] do
+      it "should be sqrt(3)/2=%1.2f/2=%1.2f" % [SQRT_3, SQRT_3_DIV_2] do
         @triangle.height_in_two_dimensions.should == @triangle.height
-        @triangle.height.should be_very_close(Math.sqrt(3.0)/2)
+        @triangle.height.should be_very_close(SQRT_3_DIV_2)
       end
 
     end
@@ -71,9 +75,9 @@ describe Geometry::Surface do
       end
 
       (2..6).each do |precision|
-      it "should approximate with #{precision} digits precision" do
-        @triangle.calc_height(10**precision).should be_close(@triangle.height, 1.0/(10**precision))
-      end
+        it "should approximate with #{precision} digits precision" do
+          @triangle.calc_height(10**precision).should be_close(@triangle.height, 1.0/(10**precision))
+        end
       end
 
       it "should produce different values depending on precision" do
@@ -99,7 +103,7 @@ describe Geometry::Surface do
       end
 
       it "should be sqrt(3)/4 by side square" do
-        @triangle.area.should == Math.sqrt(3.0) / 4 * @triangle.side ** 2
+        @triangle.area.should == SQRT_3 / 4 * @triangle.side ** 2
       end
 
       it "should have area four times large then one of a half a side" do

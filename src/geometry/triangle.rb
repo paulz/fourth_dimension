@@ -11,7 +11,8 @@ module Geometry
     def calc_height precision = 10000
       inc = side / (precision + 0.0)
       previous_height = from_previous_dimension.height
-      precision.downto(1) do |percent|
+      start = previous_height / side * precision + 1
+      (start.to_int).downto(1) do |percent|
         sample = inc * percent
         if Math.hypot(sample, previous_height/space.dimensions) < previous_height
           return sample
@@ -35,11 +36,11 @@ module Geometry
     end
 
     def calc_volume precision = 10000
-        previous_volume = 0
-        precision.downto(0) do |portion|
-          previous_volume += from_previous_dimension(side * portion/precision).volume
-        end
-        previous_volume * height / precision
+      previous_volume = 0
+      precision.downto(0) do |portion|
+        previous_volume += from_previous_dimension(side * portion/precision).volume
+      end
+      previous_volume * height / precision
     end
 
     def calc_simplex_formula

@@ -49,7 +49,7 @@ describe "Calculations should be relatively fast" do
 
   it "#calc_height" do
     @benchmark = Benchmark.measure do
-      (1..80 * PERFORMANCE_FACTOR).each do
+      (1..500 * PERFORMANCE_FACTOR).each do
         @pentachoron.calc_height 1000
       end
     end

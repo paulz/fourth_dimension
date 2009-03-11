@@ -17,6 +17,15 @@ module Geometry
       side
     end
 
+    def approx_volume &block
+      if block_given?
+        yield
+      else
+        volume
+      end
+    end
+
+
     protected
 
     def from_previous_dimension with_side = side
