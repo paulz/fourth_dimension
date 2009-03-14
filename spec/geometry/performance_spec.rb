@@ -13,7 +13,7 @@ describe "Calculations should be relatively fast" do
     @benchmark.utime.should be_close(0.069, 0.04)
   end
 
-  PERFORMANCE_FACTOR = 1.5
+  PERFORMANCE_FACTOR = 1.4
 
   it "#volume" do
     @benchmark = Benchmark.measure do
