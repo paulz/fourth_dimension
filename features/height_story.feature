@@ -18,12 +18,15 @@ Feature: Triangle height calculation
     Given 2 dimentional space
     When triangle with side 1
     Then it's height should eq sqrt(3)/2
+    Then it's calc_height should be 0.866
     Then it's volume should eq sqrt(3)/4
 
     When triangle with side 2
     Then it's height should eq sqrt(3)
+    Then it's calc_height should be 1.732
     Then it's volume should eq sqrt(3)
 
     When triangle with side 0.5
     Then it's height should eq sqrt(3)/4
+    Then it's calc_height should be 0.433
     Then it's volume should eq sqrt(3)/16

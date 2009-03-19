@@ -48,7 +48,7 @@ describe Geometry::Surface do
       @triangle.side.should == 1
       @triangle.area.should < 1
       @triangle.vertices.should == 3
-      @triangle.volume.should == 0.4330127018922193
+      @triangle.volume.should == SQRT_3 / 4
     end
 
     context "#height" do
