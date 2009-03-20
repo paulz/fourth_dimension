@@ -20,13 +20,17 @@ Feature: Triangle height calculation
     Then it's height should eq sqrt(3)/2
     Then it's calc_height should be 0.866
     Then it's volume should eq sqrt(3)/4
+    Then height forms a right triangle: 0.75 + 0.25 == 1
 
     When triangle with side 2
     Then it's height should eq sqrt(3)
     Then it's calc_height should be 1.732
     Then it's volume should eq sqrt(3)
+    Then height forms a right triangle: 3 + 1 == 4
 
     When triangle with side 0.5
     Then it's height should eq sqrt(3)/4
     Then it's calc_height should be 0.433
     Then it's volume should eq sqrt(3)/16
+    Then height forms a right triangle: 0.1875 + 0.0625 == 0.25
+    
