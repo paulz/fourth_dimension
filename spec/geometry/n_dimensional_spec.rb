@@ -59,11 +59,15 @@ require File.dirname(__FILE__)+ '/../spec_helper.rb'
 
       describe "#hight" do
         it "should be smaller then a side" do
-          @space.simplex(1).height.should < @space.simplex(1).side
+          @space.simplex(17).height.should < @space.simplex(17).side
         end
 
         it "should be proportional to the side" do
           (@figure1.height/@figure2.height).should be_very_close(@figure1.side/@figure2.side)
+        end
+
+        it "should be proportional to a triangle height from previous dimention" do
+          (@space.simplex(5).height / @space.previous.simplex(5).height).should be_very_close(@space.previous_height_ratio)
         end
       end
 

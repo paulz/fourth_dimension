@@ -10,6 +10,10 @@ describe Geometry::ThreeDimensionalSpace do
     @space.to_s.should == "Space of 3 dimensions"
   end
 
+  it "should have previous_dimention_ratio sqrt(8)/3" do
+    @space.previous_height_ratio.should == Math.sqrt(8) / 3
+  end
+
   context "3D figures" do
     describe "#cube" do
       it "volume should be cube of a side" do
@@ -55,6 +59,11 @@ describe Geometry::ThreeDimensionalSpace do
       end
 
       context "#height" do
+        it "should be proportional to a triangle height from previous dimention" do
+          @previous_triangle = @space.previous.triangle(@tetrahedron.side)
+          @tetrahedron.height.should == @previous_triangle.height * @space.previous_height_ratio
+        end
+        
         it "should have a known height of sqrt(2/3)=sqrt(2)/sqrt(3)=%1.2f/%1.2f=%1.2f" % [Math.sqrt(2.0), Math.sqrt(3.0), Math.sqrt(2.0/3)] do
           @tetrahedron.height.should be_close(Math.sqrt(2.0/3), 0.001)
         end

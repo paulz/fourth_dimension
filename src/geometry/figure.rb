@@ -21,7 +21,7 @@ module Geometry
 
     def from_previous_dimension with_side = side
       if with_side == side
-        @previous ||  @previous = from_previous_dimension_class(with_side)
+        @previous || @previous = from_previous_dimension_class(with_side)
       else
         from_previous_dimension_class(with_side)
       end

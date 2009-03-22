@@ -33,7 +33,7 @@ describe "Calculations should be relatively fast" do
 
   it "#calc_simplex_formula" do
     @benchmark = Benchmark.measure do
-      (1..4000 * PERFORMANCE_FACTOR).each do
+      (1..2000 * PERFORMANCE_FACTOR).each do
         @pentachoron.calc_simplex_formula
       end
     end
@@ -49,7 +49,7 @@ describe "Calculations should be relatively fast" do
 
   it "#calc_height" do
     @benchmark = Benchmark.measure do
-      (1..500 * PERFORMANCE_FACTOR).each do
+      (1..200 * PERFORMANCE_FACTOR).each do
         @pentachoron.calc_height 1000
       end
     end

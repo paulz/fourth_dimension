@@ -1,4 +1,12 @@
 module Geometry
+
+  class Space
+    # makes sense only when dimensions >= 2
+    def previous_height_ratio
+      @previous_dimention_ratio || @previous_dimention_ratio = Math.sqrt(dimensions ** 2 - 1) / dimensions
+    end
+  end
+
   class Triangle < Figure
     def height
       height_from_simple_formula
@@ -26,12 +34,12 @@ module Geometry
     end
 
     def over_analize_height
-      case space.dimensions
-      when 0, 1:
+      if space.dimensions < 2
         volume
       else
-        previous = from_previous_dimension.over_analize_height
-        Math.sqrt( previous ** 2 - (previous/space.dimensions) ** 2 )
+        from_previous_dimension.over_analize_height * space.previous_height_ratio
+        #  Right triangle with previous height as a hypotenuse and current height as a side
+        #  height = Math.sqrt( previous_height ** 2 - (previous_height / space.dimensions) ** 2)
       end
     end
 

@@ -11,6 +11,10 @@ describe Geometry::Surface do
     @surface.to_s.should == "Space of 2 dimensions"
   end
 
+  it "should have previous_dimention_ratio" do
+    @surface.previous_height_ratio.should == Math.sqrt(3)/2
+  end
+
   context "#square" do
     before :all do
       @square = @surface.square(2)
@@ -59,6 +63,13 @@ describe Geometry::Surface do
 
       it "should form in a right-angled triangle with half a side and a side as hypotenuse" do
         Math.hypot(@triangle.height, @triangle.side/2).should be_very_close(@triangle.side)
+      end
+
+      it "should be proportional to a triangle height from previous dimention" do
+        @surface_triangle = @surface.triangle(7)
+        @previous_triangle = @surface.previous.triangle(7)
+        @previous_triangle.height.should == 7
+        @surface_triangle.height.should == @previous_triangle.height * @surface.previous_height_ratio
       end
 
       it "should be sqrt(3)/2=%1.2f/2=%1.2f" % [SQRT_3, SQRT_3_DIV_2] do
